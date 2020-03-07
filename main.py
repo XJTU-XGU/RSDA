@@ -9,7 +9,7 @@ def main(args):
     args.log_file.write('\n\n###########  initialization ############')
     acc, model_temp = train_init(args)
     best_acc = acc
-    best_model = copy.deepcopy(best_model_temp)
+    best_model = copy.deepcopy(model_temp)
     for stage in range(args.stages):
         print('\n\n########### stage : {:d}th ##############\n\n'.format(stage))
         args.log_file.write('\n\n########### stage : {:d}th    ##############'.format(stage))
