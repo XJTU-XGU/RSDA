@@ -7,18 +7,18 @@ import os
 
 def main(args):
     args.log_file.write('\n\n###########  initialization ############')
-    acc, best_model_temp = train_init(args)
+    acc, model_temp = train_init(args)
     best_acc = acc
     best_model = copy.deepcopy(best_model_temp)
     for stage in range(args.stages):
         print('\n\n########### stage : {:d}th ##############\n\n'.format(stage))
         args.log_file.write('\n\n########### stage : {:d}th    ##############'.format(stage))
-        make_weighted_pseudo_list(args, best_model_temp)
-        acc,best_model_temp = train(args)
+        make_weighted_pseudo_list(args, model_temp)
+        acc,model_temp = train(args)
         if acc > best_acc:
             best_acc = acc
-            best_model = copy.deepcopy(best_model_temp)
-    torch.save(best_model,'snapshot/final_best_model.pk')
+            best_model = copy.deepcopy(model_temp)
+    torch.save(best_model,'snapshot/save/final_best_model.pk')
     print('final_best_acc:{:.4f}'.format(best_acc))
     return best_acc,best_model
 
