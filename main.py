@@ -7,17 +7,14 @@ import os
 
 def main(args):
     args.log_file.write('\n\n###########  initialization ############')
-    acc, best_model_temp, temp_model = train_init(args)
+    acc, best_model_temp = train_init(args)
     best_acc = acc
     best_model = copy.deepcopy(best_model_temp)
     for stage in range(args.stages):
         print('\n\n########### stage : {:d}th ##############\n\n'.format(stage))
         args.log_file.write('\n\n########### stage : {:d}th    ##############'.format(stage))
-        if args.model_selection:
-            make_weighted_pseudo_list(args, best_model_temp)
-        else:
-            make_weighted_pseudo_list(args,temp_model)
-        acc,best_model_temp, temp_model = train(args)
+        make_weighted_pseudo_list(args, best_model_temp)
+        acc,best_model_temp = train(args)
         if acc > best_acc:
             best_acc = acc
             best_model = copy.deepcopy(best_model_temp)
@@ -45,7 +42,6 @@ if __name__ == "__main__":
     parser.add_argument('--max_iter',type=int,default=5000)
     parser.add_argument('--gamma',type=float,default=0.1,help='coefficient of entropy')
     parser.add_argument('--batch_size',type=int,default=36)
-    parser.add_argument('--model_selection',type=bool,default=False,help='whether to select the best model in each stage')
     parser.add_argument('--log_file')
     args = parser.parse_args()
     if args.source == 'amazon':
