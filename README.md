@@ -8,7 +8,7 @@ Numpy <br>
 Scipy <br>
 argparse <br>
 ## Dataset:
-Please modify the path of the images in every ".txt" in "./data".
+Please modify the path of the images in every ".txt" in "./data/office".
 ## Training:
 Please run main.py as following according to your own gpu numbers.<br>
 `python3 main.py --gpu_id '0,1' `
