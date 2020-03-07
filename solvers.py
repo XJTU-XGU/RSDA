@@ -137,7 +137,7 @@ def train(args):
         Cs_memory.detach_()
         Ct_memory.detach_()
 
-    return best_acc, best_model, model
+    return best_acc, best_model
 
 
 def train_init(args):
@@ -231,7 +231,7 @@ def train_init(args):
         Cs_memory.detach_()
         Ct_memory.detach_()
 
-    return best_acc, best_model, model
+    return best_acc, best_model
 
 
 
