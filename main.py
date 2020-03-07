@@ -45,7 +45,7 @@ if __name__ == "__main__":
     parser.add_argument('--max_iter',type=int,default=5000)
     parser.add_argument('--gamma',type=float,default=0.1,help='coefficient of entropy')
     parser.add_argument('--batch_size',type=int,default=36)
-    parser.add_argument('--model_selection',type=bool,default=True,help='whether selecting best model in each stage')
+    parser.add_argument('--model_selection',type=bool,default=False,help='whether to select the best model in each stage')
     parser.add_argument('--log_file')
     args = parser.parse_args()
     if args.source == 'amazon':
