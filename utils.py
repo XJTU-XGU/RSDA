@@ -24,6 +24,9 @@ def cosine_matrix(x,y):
 def SM(Xs,Xt,Ys,Yt,Cs_memory,Ct_memory,Wt=None,decay=0.3):
     Cs=Cs_memory.clone()
     Ct=Ct_memory.clone()
+    r = torch.norm(Xs,dim=1)[0]
+    Ct=r*Ct/(torch.norm(Ct,dim=1,keepdim=True)+1e-10)
+    Cs=r*Cs/(torch.norm(Cs,dim=1,keepdim=True)+1e-10)
     K=Cs.size(0)
     for k in range(K):
         Xs_k=Xs[Ys==k]
