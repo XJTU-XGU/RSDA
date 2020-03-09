@@ -11,7 +11,9 @@ argparse <br>
 Please modify the path of the images in every ".txt" in "./data/office".
 ## Training:
 Please run main.py as following according to your own gpu numbers.<br>
-``python3 main.py --source amazon --target dslr --source_list ./data/office/amazon_list.txt --target_list ./data/office/dslr_list.txt --gpu_id 0 ``
+```
+<p>python3 main.py --source amazon --target dslr --source_list ./data/office/amazon_list.txt --target_list ./data/office/dslr_list.txt --gpu_id 0 </p>
+```
 ## Citation:
 To be added.
 ## Reference code:
