@@ -40,12 +40,9 @@ if __name__ == "__main__":
     parser.add_argument('--num_class',type=int,default=31,help='the number of classes')
     parser.add_argument('--stages',type=int,default=6,help='the number of alternative iteration stages')
     parser.add_argument('--max_iter',type=int,default=5000)
-    parser.add_argument('--gamma',type=float,default=0.1,help='coefficient of entropy')
     parser.add_argument('--batch_size',type=int,default=36)
     parser.add_argument('--log_file')
     args = parser.parse_args()
-    if args.source == 'amazon':
-        args.gamma = 1.0
 
     os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu_id
     if not os.path.exists('snapshot'):
