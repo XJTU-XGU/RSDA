@@ -20,7 +20,7 @@ def main(args):
         args.log_file.write('\n\n########### stage : {:d}th    ##############'.format(stage))
         
         #updating parameters of gaussian-uniform mixture model with fixed network parameters，the updated pseudo labels and 
-        #posterior probability of correct labeling is listed in folder "./data/office(datasetname)/pseudo_list"
+        #posterior probability of correct labeling is listed in folder "./data/office(dataset name)/pseudo_list"
         make_weighted_pseudo_list(args, model)
         
         #updating network parameters with fixed gussian-uniform mixture model and pseudo labels
