@@ -19,11 +19,11 @@ def main(args):
         print('\n\n########### stage : {:d}th ##############\n\n'.format(stage))
         args.log_file.write('\n\n########### stage : {:d}th    ##############'.format(stage))
         
-        #updating parameters of gaussian-uniform mixture model with fixing network parameters，the updated pseudo labels and 
+        #updating parameters of gaussian-uniform mixture model with fixed network parameters，the updated pseudo labels and 
         #posterior probability of correct labeling is listed in folder "./data/office(datasetname)/pseudo_list"
         make_weighted_pseudo_list(args, model)
         
-        #updating network parameters with fixing gussian-uniform mixture model and pseudo labels
+        #updating network parameters with fixed gussian-uniform mixture model and pseudo labels
         acc,model = train(args)
         
         if acc > best_acc:
