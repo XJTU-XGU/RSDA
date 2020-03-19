@@ -9,7 +9,7 @@ Scipy <br>
 argparse <br>
 ## Dataset:
 Offie-31 dataset can be found [here](https://people.eecs.berkeley.edu/~jhoffman/domainadapt/). <br>
-Please download the dataset and put in './data' and modify the path of the images in every ".txt" in "./data/office".
+Please download the dataset and put in './data' and modify the path of the images in every ".txt".
 ## Training:
 Please run main.py as following according to your own gpu numbers.<br>
 ```
