@@ -8,6 +8,7 @@ Numpy <br>
 Scipy <br>
 argparse <br>
 ## Dataset:
+Offie-31 dataset can be found [here](https://people.eecs.berkeley.edu/~jhoffman/domainadapt/)
 Please modify the path of the images in every ".txt" in "./data/office".
 ## Training:
 Please run main.py as following according to your own gpu numbers.<br>
