@@ -7,17 +7,29 @@ import os
 
 def main(args):
     args.log_file.write('\n\n###########  initialization ############')
-    acc, model_temp = train_init(args)
+    
+    #initializing
+    acc, model = train_init(args)
+    
     best_acc = acc
-    best_model = copy.deepcopy(model_temp)
+    best_model = copy.deepcopy(model)
+    
     for stage in range(args.stages):
+        
         print('\n\n########### stage : {:d}th ##############\n\n'.format(stage))
         args.log_file.write('\n\n########### stage : {:d}th    ##############'.format(stage))
-        make_weighted_pseudo_list(args, model_temp)
-        acc,model_temp = train(args)
+        
+        #updating parameters of gaussian-uniform mixture model with fixing network parameters，the updated pseudo labels and 
+        #posterior probability of correct labeling is listed in folder "./data/office(datasetname)/pseudo_list"
+        make_weighted_pseudo_list(args, model)
+        
+        #updating network parameters with fixing gussian-uniform mixture model and pseudo labels
+        acc,model = train(args)
+        
         if acc > best_acc:
             best_acc = acc
-            best_model = copy.deepcopy(model_temp)
+            best_model = copy.deepcopy(model)
+            
     torch.save(best_model,'snapshot/save/final_best_model.pk')
     print('final_best_acc:{:.4f}'.format(best_acc))
     return best_acc,best_model
