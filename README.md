@@ -8,12 +8,12 @@ Numpy <br>
 Scipy <br>
 argparse <br>
 ## Dataset:
-Offie-31 dataset can be found [here](https://people.eecs.berkeley.edu/~jhoffman/domainadapt/)
-Please modify the path of the images in every ".txt" in "./data/office".
+Offie-31 dataset can be found [here](https://people.eecs.berkeley.edu/~jhoffman/domainadapt/). <br>
+Please download the dataset and put in './data' and modify the path of the images in every ".txt" in "./data/office".
 ## Training:
 Please run main.py as following according to your own gpu numbers.<br>
 ```
-python3 main.py --source amazon --target dslr --source_list ./data/office/amazon_list.txt --target_list ./data/office/dslr_list.txt --gpu_id 0 
+python3 main.py --dataset office --source amazon --target dslr --source_list ./data/office/amazon_list.txt --target_list ./data/office/dslr_list.txt --gpu_id 0 
 ```
 ## Citation:
 To be added.
