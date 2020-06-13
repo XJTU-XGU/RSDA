@@ -16,6 +16,7 @@ Please run main.py as following according to your own gpu numbers.<br>
 python3 main.py --dataset office --source amazon --target dslr --source_list ./data/office/amazon_list.txt --target_list ./data/office/dslr_list.txt --gpu_id 0 
 ```
 ## Citation:
+```
 @InProceedings{Gu_2020_CVPR,
 author = {Gu, Xiang and Sun, Jian and Xu, Zongben},
 title = {Spherical Space Domain Adaptation With Robust Pseudo-Label Loss},
@@ -23,6 +24,7 @@ booktitle = {IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVP
 month = {June},
 year = {2020}
 }
+```
 ## Reference code:
 Some parts of the code are built based on https://github.com/thuml/CDAN.
 ## Contact：
