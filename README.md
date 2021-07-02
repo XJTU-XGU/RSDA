@@ -28,4 +28,4 @@ year = {2020}
 ## Reference code:
 Some parts of the code are built based on https://github.com/thuml/CDAN.
 ## Contact：
-If you have any problem, please contact xiangu@stu.xjtu.edu.cn.
+If you have any problem, please contact xianggu@stu.xjtu.edu.cn.
