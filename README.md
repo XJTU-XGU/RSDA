@@ -29,3 +29,7 @@ year = {2020}
 Some parts of the code are built based on https://github.com/thuml/CDAN.
 ## Contact：
 If you have any problem, please contact xianggu@stu.xjtu.edu.cn.
+
+|A->D|A->W|D->A|W->A|
+|------|------|------|------|
+|96.7|95.5|77.9|78.1|
