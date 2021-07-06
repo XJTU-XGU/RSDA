@@ -12,7 +12,7 @@ To obtain the initial model, run
 ```
 python train_init.py --source amazon --target dslr
 ```
-The returned accuracy is the results of method "MSTN+S". The trained initial model can also be found at https://drive.google.com/drive/folders/1PsaCpuwQt1NJwS4UjmvdtES_f9RK0NBP?usp=sharing.
+The returned accuracy is the results of method "MSTN+S" in our paper. The trained initial model can also be found at https://drive.google.com/drive/folders/1PsaCpuwQt1NJwS4UjmvdtES_f9RK0NBP?usp=sharing.
 ## Training:
 Download the initial model and put it into the folder "./save/init_model". Then run
 ```
