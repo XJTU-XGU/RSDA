@@ -7,7 +7,7 @@ Torchvision ==0.6.0 <br>
 Numpy==1.19.2 <br>
 Scipy==1.5.4 <br>
 Scikit-learn==0.17.1 <br>
-##Initialization:
+## Initialization:
 To obtain the initial model, run 
 ```
 python train_init.py --source amazon --target dslr
