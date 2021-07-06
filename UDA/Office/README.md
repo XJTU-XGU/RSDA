@@ -22,7 +22,7 @@ python train_with_pseudo_label.py --source amazon --target dslr
 We run the code on a single NVIDIA Tesla V100 GPU, the results are as follows.<br>
 |A->D|A->W|D->A|W->A|
 |------|------|------|------|
-|96.7|95.9|77.9|78.1|
+|96.7|95.9|77.9|78.4|
 ## Citation:
 ```
 @InProceedings{Gu_2020_CVPR,
