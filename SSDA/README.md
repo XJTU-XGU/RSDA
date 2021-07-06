@@ -1,1 +1,1 @@
-RSDA for semi-supervised domain adaptation (SSDA)
+RSDA for semi-supervised domain adaptation (SSDA). Coming soon!
