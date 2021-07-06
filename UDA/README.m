@@ -1,2 +1,2 @@
 
-RSDA for unsupervised domain adaptation (UDA).
+**RSDA for unsupervised domain adaptation (UDA).
