@@ -14,7 +14,7 @@ python train_init.py --source amazon --target dslr
 ```
 The returned accuracy is the results of method "MSTN+S". The initial model can be found at https://drive.google.com/drive/folders/1PsaCpuwQt1NJwS4UjmvdtES_f9RK0NBP?usp=sharing.
 ## Training:
-Download the initial model and put it into the folder "save/init_model". Then run
+Download the initial model and put it into the folder "./save/init_model". Then run
 ```
 python train_with_pseudo_label.py --source amazon --target dslr
 ```
