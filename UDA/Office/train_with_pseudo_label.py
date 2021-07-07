@@ -231,6 +231,7 @@ if __name__ == "__main__":
         seed = 1
     elif config["source"] == "amazon" and config["target"] == "webcam":
         seed = 0
+        config["tradeoff_ent"] = 0.1
     elif config["source"] == "dslr" and config["target"] == "amazon":
         seed = 1
     else:
