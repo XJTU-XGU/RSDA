@@ -174,7 +174,7 @@ def train(config):
     return best_acc
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Code for MSTN-RSDA')
+    parser = argparse.ArgumentParser(description='Code for RSDA-MSTN')
     parser.add_argument('--gpu_id', type=str, nargs='?', default='5', help="device id to run")
     parser.add_argument('--source', type=str, default='amazon',choices=["amazon", "dslr","webcam"])
     parser.add_argument('--target', type=str, default='dslr', choices=["amazon", "dslr", "webcam"])
