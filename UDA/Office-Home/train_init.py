@@ -184,8 +184,8 @@ if __name__ == "__main__":
     parser.add_argument('--stages', type=int, default=6, help="training stages")
     parser.add_argument('--radius', type=float, default=20.0, help="radius")
     args = parser.parse_args()
-    s_dset_path = '/data/guxiang/dataset/office-home/' + args.source + '.txt'
-    t_dset_path = '/data/guxiang/dataset/office-home/' + args.target + '.txt'
+    s_dset_path = '/data/guxiang/dataset/office-home/' + args.source + '.txt' #'../../data/office-home/' + args.source + '.txt'
+    t_dset_path = '/data/guxiang/dataset/office-home/' + args.target + '.txt' #'../../data/office-home/' + args.target + '.txt'
 
     os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu_id
     config = {}
