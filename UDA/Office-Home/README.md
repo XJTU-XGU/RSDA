@@ -20,7 +20,7 @@ python train_with_pseudo_label.py --source Art --target Clipart
 ```
 ## Results
 We run the code on a single NVIDIA Tesla V100 GPU, the results are as follows.<br>
-|Method |Ar-Cl|Ar-Pr|Ar-Rw|Cl-Ar|Cl-Pr|Cl-Rw|Pr-Ar|Pr-Cl|Pr-Rw|Rw-Ar|Rw-Pr|Avg|
+|Method |Ar-Cl|Ar-Pr|Ar-Rw|Cl-Ar|Cl-Pr|Cl-Rw|Pr-Ar|Pr-Cl|Pr-Rw|Rw-Ar|Rw-Cl|Rw-Pr|Avg|
 |----|----|----|----|----|----|----|----|----|----|----|----|----|----|
 |MSTN+S   |57.7|73.7|79.1|65.2|74.8|74.4|65.0|58.4|81.0|73.4|59.7|83.4|70.5|
 |RSDA-MSTN|59.9|78.6|81.5|68.5|77.7|77.9|67.5|60.9|82.3|75.3|61.5|85.7|73.1|<br>
