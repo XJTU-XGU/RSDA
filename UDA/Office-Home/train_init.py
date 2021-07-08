@@ -174,7 +174,7 @@ def train(config):
     return best_acc
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Code for MSTN+S')
+    parser = argparse.ArgumentParser(description='Code for RSDA-MSTN')
     parser.add_argument('--gpu_id', type=str, nargs='?', default='5', help="device id to run")
     parser.add_argument('--source', type=str, default='Art',choices=["Art","Clipart", "Product","Real_World"])
     parser.add_argument('--target', type=str, default='Clipart', choices=["Art","Clipart", "Product","Real_World"])
