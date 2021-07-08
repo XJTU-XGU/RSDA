@@ -19,7 +19,7 @@ Download the initial model and put it into the folder "./save/init_model". Then 
 python train_with_pseudo_label.py --source Art --target Clipart
 ```
 ## Results
-We run the code on a single NVIDIA Tesla V100 GPU, the results are as follows.<br>
+We run the code on a single NVIDIA Tesla V100 GPU, the results are as follows. The results are higher than those reported in the original paper.<br>
 |Method |Ar-Cl|Ar-Pr|Ar-Rw|Cl-Ar|Cl-Pr|Cl-Rw|Pr-Ar|Pr-Cl|Pr-Rw|Rw-Ar|Rw-Cl|Rw-Pr|Avg|
 |----|----|----|----|----|----|----|----|----|----|----|----|----|----|
 |MSTN+S   |57.7|73.7|79.1|65.2|74.8|74.4|65.0|58.4|81.0|73.4|59.7|83.4|70.5|
