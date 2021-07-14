@@ -21,7 +21,7 @@ python train_with_pseudo_label.py --source train --target validation
 ## Results
 We run the code on a single NVIDIA Tesla V100 GPU, the results are as follows.<br>
 | |Synthetic-Real|
-|----|----|
+|----|:----:|
 |DANN+S   |68.5|
 |RSDA-DANN|76.3|
 ## Citation:
