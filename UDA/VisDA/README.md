@@ -12,7 +12,7 @@ To obtain the initial model, run
 ```
 python train_init.py --source train --target validation
 ```
-The returned accuracy is the result of method "DANN+S" in our paper. The trained initial model can also be found at https://drive.google.com/file/d/1jhqUm5WE4oZa4LvDhwxMJCzKX_y0syh7/view?usp=sharing.
+The returned accuracy is the result of method "DANN+S" in our paper. The trained initial model can also be found at https://drive.google.com/drive/folders/1leBh0cjjKyIXx5crrBs_r8_M-kfogmmy?usp=sharing.
 ## Training:
 Download the initial model and put it into the folder "./save/init_model". Then run
 ```
