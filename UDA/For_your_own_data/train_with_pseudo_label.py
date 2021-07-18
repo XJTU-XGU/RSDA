@@ -233,7 +233,7 @@ if __name__ == "__main__":
                       "test": {"list_path": args.t_dset_path, "batch_size": 72}}
     config["out_file"].flush()
     config["iterations"] = 10000  ##you can also tune it for your data
-    config["tradeoff_ent"] = 1.0
+    config["tradeoff_ent"] = 0.1  ##you can also tune it for your data
 
     seed = 0
     torch.manual_seed(seed)
