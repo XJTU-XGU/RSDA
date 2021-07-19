@@ -14,11 +14,11 @@ To obtain the initial model, run
 ```
 python train_init.py --source xxx --target xxx --num_class xxx --s_dset_path xxx --t_dset_path xxx
 ```
-"--source" is the source domain name <br>
-"--target" is the target domain name <br>
-"--num_class" is the number of classes <br>
-"--s_dset_path" is the path to the source data list <br>
-"--t_dset_path" is the path to the target data list <br>
+"--source": the source domain name <br>
+"--target": the target domain name <br>
+"--num_class": the number of classes <br>
+"--s_dset_path": the path to the source data list <br>
+"--t_dset_path": the path to the target data list <br>
 ## Training:
 Run
 ```
