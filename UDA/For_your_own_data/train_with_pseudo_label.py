@@ -174,7 +174,10 @@ def train(config):
         H = torch.mean(loss.Entropy(softmax_tar_out))
 
         lam=network.calc_coeff(i,max_iter=2000)
-        total_loss = classifier_loss+classifier_loss_target+lam*loss_sm+transfer_loss+config["tradeoff_ent"]*lam*H
+        if config["method"] == "RSDA-DANN":
+            total_loss = classifier_loss+classifier_loss_target+0.0*lam*loss_sm+transfer_loss+config["tradeoff_ent"]*lam*H
+        if config["method"] == "RSDA-MSTN":
+            total_loss = classifier_loss+classifier_loss_target+lam*loss_sm+transfer_loss+config["tradeoff_ent"]*lam*H
 
         optimizer_classfier.zero_grad()
         optimizer_feature.zero_grad()
