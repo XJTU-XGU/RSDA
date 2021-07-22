@@ -1,5 +1,5 @@
 # Robust Spherical Domain Adaptation
-RSDA code for your own data.
+RSDA code for your own datasets other than office, office-home, and visda.
 ## Prerequisites:
 Python==3.6.13 <br>
 Pytorch ==1.5.1 <br>
