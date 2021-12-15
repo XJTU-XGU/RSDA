@@ -27,7 +27,6 @@ python train_with_pseudo_label_cas.py --source train --target validation
 We run the code on a single NVIDIA Tesla V100 GPU, the results are as follows.<br>
 | |Synthetic-Real|
 |----|:----:|
-|DANN+S   |68.5|
 |RSDA-DANN|81.9|
 |RSDA-DANN-CAS|82.9|
 ## Citation:
