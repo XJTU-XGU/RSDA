@@ -13,17 +13,23 @@ To obtain the initial model, run
 python train_init.py --source train --target validation
 ```
 The returned accuracy is the result of method "DANN+S" in our paper. The trained initial model can also be found at https://drive.google.com/drive/folders/1leBh0cjjKyIXx5crrBs_r8_M-kfogmmy?usp=sharing.
-## Training:
+## Training RSDA-DANN:
 Download the initial model and put it into the folder "./save/init_model". Then run
 ```
 python train_with_pseudo_label.py --source train --target validation
+```
+## Training RSDA-DANN with class-aware sampling:
+Download the initial model and put it into the folder "./save/init_model". Then run
+```
+python train_with_pseudo_label_cas.py --source train --target validation
 ```
 ## Results
 We run the code on a single NVIDIA Tesla V100 GPU, the results are as follows.<br>
 | |Synthetic-Real|
 |----|:----:|
 |DANN+S   |68.5|
-|RSDA-DANN|76.3|
+|RSDA-DANN|81.9|
+|RSDA-DANN-CAS|82.9|
 ## Citation:
 ```
 @InProceedings{Gu_2020_CVPR,

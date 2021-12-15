@@ -9,7 +9,7 @@ import pre_process as prep
 from torch.utils.data import DataLoader
 import lr_schedule
 import torch.nn.functional as F
-from pre_process import ImageList,ImageListPseudo
+from pre_process import ImageList,ImageListPseudo,ClassAwareSamplingSTDataset
 import copy
 import numpy as np
 import random
@@ -65,7 +65,7 @@ def image_classification_test(loader, model):
     print("========accuracy per class==========")
     print(subclasses_result, subclasses_result.mean())
 
-    return accuracy,subclasses_result.mean()
+    return accuracy,subclasses_result.mean(),predict
 
 
 def train(config):
@@ -94,7 +94,20 @@ def train(config):
 
     dsets["target_pseudo"] = ImageListPseudo(open('new_list/' + source + '_' + target + '_list.txt').readlines(), \
                                 transform=prep_dict["target"],root=config["root"])
-    dset_loaders["target_pseudo"] = DataLoader(dsets["target_pseudo"], batch_size=36, \
+    dset_loaders["target_pseudo"] = DataLoader(dsets["target_pseudo"], batch_size=train_bs, \
+                                        shuffle=True, num_workers=4, drop_last=True)
+
+    dsets["classaware"] = ClassAwareSamplingSTDataset(open(data_config["source"]["list_path"]).readlines(),
+                                                      open('new_list/' + source + '_' + target + '_list.txt').readlines(),
+                                                      transform=prep_dict["target"],
+                                                      num_class=config["network"]["params"]["class_num"],
+                                                      num_sample_per_class=3,
+                                                      dataset_length=200,
+                                                      root=config["root"])
+    dset_loaders["classaware"] = DataLoader(dsets["classaware"], batch_size=config["network"]["params"]["class_num"], num_workers=4)
+    dsets["target_pseudo"] = ImageListPseudo(open('new_list/' + source + '_' + target + '_list.txt').readlines(), \
+                                transform=prep_dict["target"],root=config["root"])
+    dset_loaders["target_pseudo"] = DataLoader(dsets["target_pseudo"], batch_size=train_bs, \
                                         shuffle=True, num_workers=4, drop_last=True)
 
     dsets["test"] = ImageList(open(data_config["test"]["list_path"]).readlines(), \
@@ -144,7 +157,7 @@ def train(config):
     for i in range(config["iterations"]):
         if i % config[ "test_interval"] == config["test_interval"] - 1:
             base_network.train(False)
-            temp_acc,acc_class = image_classification_test(dset_loaders, base_network)
+            temp_acc,acc_class,predict = image_classification_test(dset_loaders, base_network)
             temp_model = base_network
             if acc_class > best_acc_class:
                 best_acc_class = acc_class
@@ -157,7 +170,8 @@ def train(config):
             config["out_file"].write(log_str + "\n")
             config["out_file"].flush()
             print(log_str)
-        if (i + 1) % config["snapshot_interval"] == 0 or i==(config["iterations"]-1):
+            dsets["classaware"].update_selected_classes(predict)
+        if (i + 1) % config["snapshot_interval"] == 0:
             if not os.path.exists("save/rsda_model"):
                 os.makedirs("save/rsda_model")
             torch.save(best_model, 'save/rsda_model/'+source+'_'+target+'.pkl')
@@ -174,20 +188,28 @@ def train(config):
             iter_target = iter(dset_loaders["target"])
         if i % len(dset_loaders["target_pseudo"]) == 0:
             iter_target_pseudo = iter(dset_loaders["target_pseudo"])
+        if i%len(dset_loaders["classaware"]) == 0:
+            iter_classaware = iter(dset_loaders["classaware"])
 
         inputs_source, labels_source = iter_source.next()
         inputs_target,_ = iter_target.next()
         pinputs_target, plabels_target,gammas,sigmas = iter_target_pseudo.next()
+        adv_source,adv_target = iter_classaware.next()
+        adv_source = adv_source.view(-1,3,224,224)
+        adv_target = adv_target.view(-1,3, 224, 224)
 
         inputs_source, inputs_target, pinputs_target, labels_source = inputs_source.cuda(), inputs_target.cuda(),\
                                                                       pinputs_target.cuda(),labels_source.cuda()
         gammas,sigmas=gammas.type(torch.Tensor).cuda(),sigmas.type(torch.Tensor).cuda()
+        adv_source, adv_target = adv_source.cuda(),adv_target.cuda()
+
         weight_c = gammas
         weight_c[weight_c < 0.5] = 0.0
 
         features_source, outputs_source = base_network(inputs_source)
         features_target, _ = base_network(inputs_target)
-        features = torch.cat((features_source, features_target), dim=0)
+        adv_inputs = torch.cat((adv_source, adv_target), dim=0)
+        features,_ = base_network(adv_inputs)
         transfer_loss = loss.DANN(features, ad_net)
         classifier_loss = nn.CrossEntropyLoss()(outputs_source, labels_source)
 
@@ -212,7 +234,7 @@ def train(config):
         print('step:{: d},\t,class_loss:{:.4f},\t,transfer_loss:{:.4f},'
               '\t,class_loss_t:{:.4f}, \t H:{:.4f}'.format(i, classifier_loss.item(),
                                               transfer_loss.item(),classifier_loss_target.item(),H.item()))
-    return best_acc
+    return best_acc,best_acc_class
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Code for RSDA-DANN')
@@ -226,6 +248,7 @@ if __name__ == "__main__":
     parser.add_argument('--radius', type=float, default=8.5, help="radius")
     args = parser.parse_args()
     root = "/public/home/guxiang/guxiang/datasets"
+    # root = "/data/guxiang/dataset"
     s_dset_path = '{}/visda-2017/'.format(root) + args.source + '.txt'
     t_dset_path = '{}/visda-2017/'.format(root) + args.target + '.txt'
 
@@ -240,7 +263,7 @@ if __name__ == "__main__":
     config["output_path"] = "snapshot/rsda"
     if not osp.exists(config["output_path"]):
         os.makedirs(config["output_path"])
-    config["out_file"] = open(osp.join(config["output_path"],args.source+"_"+args.target+ "_log.txt"), "w")
+    config["out_file"] = open(osp.join(config["output_path"],args.source+"_"+args.target+ "_log_cas.txt"), "a")
 
     config["prep"] = {'params':{"resize_size":256, "crop_size":224}}
     config["network"] = {"name":network.ResNetCos, \
@@ -252,7 +275,7 @@ if __name__ == "__main__":
                       "target":{"list_path":t_dset_path, "batch_size":64}, \
                       "test":{"list_path":t_dset_path, "batch_size":128}}
     config["out_file"].flush()
-    config["iterations"] = 5001
+    config["iterations"] = 10001
     config["tradeoff_ent"] = 1.0
     config["root"]=root
 
@@ -263,16 +286,19 @@ if __name__ == "__main__":
     random.seed(seed)
     torch.backends.cudnn.deterministic = True
     best_acc = 0.0
+    best_acc_class = 0
     for k in range(0,args.stages,1):
-        print('time:',k)
-        config["out_file"].write('\n---time:'+str(k)+'---\n')
-        pseudo_labeling.make_new_list(args.source, args.target, iter_times=k,root=config["root"])
         if k==0:
             config["iterations"] = 801
         else:
             config["iterations"] = 5001
-        temp_acc=train(config)
+        print('time:',k)
+        config["out_file"].write('\n---time:'+str(k)+'---\n')
+        pseudo_labeling.make_new_list(args.source, args.target, iter_times=k,root=config["root"])
+        temp_acc,temp_acc_class=train(config)
         if best_acc<temp_acc:
             best_acc=temp_acc
+        if best_acc_class<temp_acc_class:
+            best_acc_class=temp_acc_class
     print("best_acc:",best_acc)
-    config["out_file"].write('\nbest_acc:{:.4f}'.format(best_acc))
+    config["out_file"].write('\nbest_acc:{:.4f}\tbest_acc_class:{:.4f}'.format(best_acc,best_acc_class))

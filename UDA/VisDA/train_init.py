@@ -58,16 +58,16 @@ def train(config):
     train_bs = data_config["source"]["batch_size"]
     test_bs = data_config["test"]["batch_size"]
     dsets["source"] = ImageList(open(data_config["source"]["list_path"]).readlines(), \
-                                transform=prep_dict["source"])
+                                transform=prep_dict["source"],root=config["root"])
     dset_loaders["source"] = DataLoader(dsets["source"], batch_size=train_bs, \
                                         shuffle=True, num_workers=4, drop_last=True)
     dsets["target"] = ImageList(open(data_config["target"]["list_path"]).readlines(), \
-                                transform=prep_dict["target"])
+                                transform=prep_dict["target"],root=config["root"])
     dset_loaders["target"] = DataLoader(dsets["target"], batch_size=train_bs, \
                                         shuffle=True, num_workers=4, drop_last=True)
 
     dsets["test"] = ImageList(open(data_config["test"]["list_path"]).readlines(), \
-                              transform=prep_dict["test"])
+                              transform=prep_dict["test"],root=config["root"])
     dset_loaders["test"] = DataLoader(dsets["test"], batch_size=test_bs, \
                                       shuffle=False, num_workers=4)
 
@@ -168,10 +168,11 @@ if __name__ == "__main__":
     parser.add_argument('--snapshot_interval', type=int, default=1000, help="interval of two continuous output model")
     parser.add_argument('--lr', type=float, default=0.001, help="learning rate")
     parser.add_argument('--stages', type=int, default=5, help="training stages")
-    parser.add_argument('--radius', type=float, default=10.0, help="radius")
+    parser.add_argument('--radius', type=float, default=8.5, help="radius")
     args = parser.parse_args()
-    s_dset_path = '/data/guxiang/dataset/visda-2017/' + args.source + '.txt'
-    t_dset_path = '/data/guxiang/dataset/visda-2017/' + args.target + '.txt'
+    root = "/public/home/guxiang/guxiang/datasets"
+    s_dset_path = '{}/visda-2017/'.format(root) + args.source + '.txt'
+    t_dset_path = '{}/visda-2017/'.format(root) + args.target + '.txt'
 
     os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu_id
     config = {}
@@ -192,11 +193,12 @@ if __name__ == "__main__":
     config["optimizer"] = {"type":optim.SGD, "optim_params":{'lr':args.lr, "momentum":0.9, \
                            "weight_decay":0.0005, "nesterov":True}, "lr_type":"inv", \
                            "lr_param":{"lr":args.lr, "gamma":0.001, "power":0.75} }
-    config["data"] = {"source":{"list_path":s_dset_path, "batch_size":36}, \
-                      "target":{"list_path":t_dset_path, "batch_size":36}, \
+    config["data"] = {"source":{"list_path":s_dset_path, "batch_size":64}, \
+                      "target":{"list_path":t_dset_path, "batch_size":64}, \
                       "test":{"list_path":t_dset_path, "batch_size":72}}
     config["out_file"].flush()
-    config["iterations"] = 10000
+    config["iterations"] = 20000
+    config["root"] = root
     seed = 0
     torch.manual_seed(seed)
     torch.cuda.manual_seed(seed)
