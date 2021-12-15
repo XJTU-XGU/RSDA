@@ -24,7 +24,7 @@ Download the initial model and put it into the folder "./save/init_model". Then 
 python train_with_pseudo_label_cas.py --source train --target validation
 ```
 ## Results
-We run the code on a single NVIDIA Tesla V100 GPU, the results are as follows.<br>
+We run the code on a single NVIDIA Tesla V100 GPU, the results (using ReaNet50 backbone) are as follows.<br>
 | |Synthetic-Real|
 |----|:----:|
 |RSDA-DANN|81.9|
