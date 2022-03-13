@@ -1,2 +1,2 @@
 
-RSDA for unsupervised domain adaptation (UDA).
+We released the code for each dataset individually.
