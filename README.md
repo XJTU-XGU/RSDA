@@ -7,5 +7,6 @@ Code for paper the following papers:
 
 Codes for unsupervised and semi-supervised domain adaptation are respectively in folders UDA and SSDA.
 
-#Cite
+##Cite
+
 If this code is helpful, please cite 
