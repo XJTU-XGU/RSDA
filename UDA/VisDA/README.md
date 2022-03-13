@@ -38,6 +38,17 @@ booktitle = {IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVP
 month = {June},
 year = {2020}
 }
+
+@ARTICLE{9733209,
+  author={Gu, Xiang and Sun, Jian and Xu, Zongben},
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence}, 
+  title={Unsupervised and Semi-supervised Robust Spherical Space Domain Adaptation}, 
+  year={2022},
+  volume={},
+  number={},
+  pages={1-1},
+  doi={10.1109/TPAMI.2022.3158637}
+}
 ```
 ## Reference code:
 Some parts of the code are borrowed from https://github.com/thuml/CDAN.
