@@ -31,4 +31,4 @@ year = {2020}
 ```
 
 # Contact
-For any problem, please do not hesitate to contact xianggu@stu.xjtu.edu.cn .
+For any problem, please do not hesitate to contact xianggu@stu.xjtu.edu.cn.
