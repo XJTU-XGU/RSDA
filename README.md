@@ -26,7 +26,8 @@ year = {2020}
   volume={},
   number={},
   pages={1-1},
-  doi={10.1109/TPAMI.2022.3158637}}
+  doi={10.1109/TPAMI.2022.3158637}
+}
 ```
 
 # Contact
