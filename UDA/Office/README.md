@@ -1,5 +1,5 @@
-# Robust Spherical Domain Adaptation
-Code for paper "Xiang Gu, Jian Sun, Zongben Xu, **Spherical Space Domain Adaptation with Robust Pseudo-label Loss**, IEEE Conf. on Computer Vision and Pattern Recognition (CVPR), 2020".
+<!-- # Robust Spherical Domain Adaptation -->
+<!-- Code for paper "Xiang Gu, Jian Sun, Zongben Xu, **Spherical Space Domain Adaptation with Robust Pseudo-label Loss**, IEEE Conf. on Computer Vision and Pattern Recognition (CVPR), 2020". -->
 ## Prerequisites:
 Python==3.6.13 <br>
 Pytorch ==1.5.1 <br>
